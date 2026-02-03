@@ -8,7 +8,8 @@ import {
   KeyRound,
   Hash,
   Lock,
-  CalendarClock
+  CalendarClock,
+  Mail
 } from 'lucide-react';
 
 // Layout components
@@ -24,7 +25,8 @@ import {
   PasswordGenerator,
   HashGenerator,
   BasicAuthGenerator,
-  CrontabGenerator
+  CrontabGenerator,
+  SmtpChecker
 } from './features';
 
 /**
@@ -40,6 +42,7 @@ const NAV_ITEMS = [
   { id: 'hash', label: 'Hash Generator', icon: Hash },
   { id: 'basicauth', label: 'Basic Auth', icon: KeyRound },
   { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock },
+  { id: 'smtp', label: 'SMTP Checker', icon: Mail },
 ];
 
 /**
@@ -55,6 +58,7 @@ const FEATURE_COMPONENTS = {
   hash: HashGenerator,
   basicauth: BasicAuthGenerator,
   crontab: CrontabGenerator,
+  smtp: SmtpChecker,
 };
 
 /**
