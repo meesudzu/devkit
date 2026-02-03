@@ -7,8 +7,8 @@ const NavItem = ({ item, isActive, onClick }) => (
     <button
         onClick={onClick}
         className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${isActive
-                ? 'bg-blue-600/10 text-blue-400 border border-blue-600/20'
-                : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+            ? 'bg-blue-600/10 text-blue-400 border border-blue-600/20'
+            : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
             }`}
     >
         <item.icon size={18} />
@@ -30,7 +30,7 @@ const Sidebar = ({ navItems, activeTab, onTabChange }) => {
             <div className="p-4 border-b border-slate-800 flex items-center gap-2 text-blue-400">
                 <Terminal size={24} />
                 <span className="font-bold text-lg tracking-tight text-slate-100">
-                    DevOps<span className="text-blue-500">Kit</span>
+                    Dev<span className="text-blue-500">Kit</span>
                 </span>
             </div>
 

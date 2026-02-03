@@ -3,7 +3,7 @@ import { Copy } from 'lucide-react';
 import { Button, Card } from '../components/ui';
 
 /**
- * Common timezones for DevOps work
+ * Common timezones
  */
 const TIMEZONES = [
     "UTC",
