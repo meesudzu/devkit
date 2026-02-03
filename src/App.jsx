@@ -4,7 +4,10 @@ import {
   ShieldCheck,
   Clock,
   Type,
-  AlignLeft
+  AlignLeft,
+  KeyRound,
+  Hash,
+  Lock
 } from 'lucide-react';
 
 // Layout components
@@ -16,7 +19,10 @@ import {
   JwtDebugger,
   EpochConverter,
   StringTools,
-  CharacterCount
+  CharacterCount,
+  PasswordGenerator,
+  HashGenerator,
+  BasicAuthGenerator
 } from './features';
 
 // UI components
@@ -31,6 +37,9 @@ const NAV_ITEMS = [
   { id: 'epoch', label: 'Epoch Converter', icon: Clock },
   { id: 'string', label: 'Base64 / URL', icon: Type },
   { id: 'charcount', label: 'Word Counter', icon: AlignLeft },
+  { id: 'password', label: 'Password Gen', icon: Lock },
+  { id: 'hash', label: 'Hash Generator', icon: Hash },
+  { id: 'basicauth', label: 'Basic Auth', icon: KeyRound },
 ];
 
 /**
@@ -42,6 +51,9 @@ const FEATURE_COMPONENTS = {
   epoch: EpochConverter,
   string: StringTools,
   charcount: CharacterCount,
+  password: PasswordGenerator,
+  hash: HashGenerator,
+  basicauth: BasicAuthGenerator,
 };
 
 /**
