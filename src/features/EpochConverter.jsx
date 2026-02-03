@@ -79,7 +79,7 @@ const EpochConverter = () => {
     const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     return (
-        <div className="flex flex-col gap-6 max-w-3xl mx-auto mt-8 h-full overflow-y-auto pr-2">
+        <div className="flex flex-col gap-6 max-w-3xl mx-auto h-full overflow-y-auto pr-2">
             {/* Current Timestamp Display */}
             <div className="text-center mb-4 shrink-0">
                 <div className="text-4xl font-mono text-blue-400 font-bold tracking-wider">

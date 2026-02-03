@@ -14,6 +14,7 @@ A sleek collection of developer tools built with React + Vite. Runs entirely in-
 | **Password Gen** | Generate secure random passwords with configurable options |
 | **Hash Generator** | Generate MD5 and bcrypt hashes |
 | **Basic Auth** | Generate HTTP headers and Nginx/Apache htpasswd entries |
+| **Crontab Gen** | Generate, explain, and validate cron expressions with UTC time |
 
 ## Quick Start
 

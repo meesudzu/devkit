@@ -55,7 +55,7 @@ const BasicAuthGenerator = () => {
     };
 
     return (
-        <div className="flex flex-col gap-6 max-w-2xl mx-auto mt-8">
+        <div className="flex flex-col gap-6 max-w-2xl mx-auto">
             <Card title="Basic Auth Generator">
                 <div className="flex flex-col gap-6">
                     {/* Credentials Input */}

@@ -57,7 +57,7 @@ const PasswordGenerator = () => {
     };
 
     return (
-        <div className="flex flex-col gap-6 max-w-2xl mx-auto mt-8">
+        <div className="flex flex-col gap-6 max-w-2xl mx-auto">
             <Card title="Password Generator">
                 <div className="flex flex-col gap-6">
                     {/* Generated Password Display */}
@@ -100,8 +100,8 @@ const PasswordGenerator = () => {
                             <label
                                 key={key}
                                 className={`flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer transition-all ${value
-                                        ? 'bg-blue-600/20 border-blue-500/50 text-blue-300'
-                                        : 'bg-slate-800 border-slate-700 text-slate-400'
+                                    ? 'bg-blue-600/20 border-blue-500/50 text-blue-300'
+                                    : 'bg-slate-800 border-slate-700 text-slate-400'
                                     }`}
                             >
                                 <input

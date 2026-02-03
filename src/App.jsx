@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import {
   ArrowRightLeft,
   ShieldCheck,
@@ -7,7 +7,8 @@ import {
   AlignLeft,
   KeyRound,
   Hash,
-  Lock
+  Lock,
+  CalendarClock
 } from 'lucide-react';
 
 // Layout components
@@ -22,11 +23,9 @@ import {
   CharacterCount,
   PasswordGenerator,
   HashGenerator,
-  BasicAuthGenerator
+  BasicAuthGenerator,
+  CrontabGenerator
 } from './features';
-
-// UI components
-import { Card } from './components/ui';
 
 /**
  * Navigation configuration
@@ -40,6 +39,7 @@ const NAV_ITEMS = [
   { id: 'password', label: 'Password Gen', icon: Lock },
   { id: 'hash', label: 'Hash Generator', icon: Hash },
   { id: 'basicauth', label: 'Basic Auth', icon: KeyRound },
+  { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock },
 ];
 
 /**
@@ -54,31 +54,44 @@ const FEATURE_COMPONENTS = {
   password: PasswordGenerator,
   hash: HashGenerator,
   basicauth: BasicAuthGenerator,
+  crontab: CrontabGenerator,
 };
 
 /**
  * Main Application Component
  */
 const App = () => {
-  const [activeTab, setActiveTab] = useState('debezium');
-
-  const activeNavItem = NAV_ITEMS.find(i => i.id === activeTab);
-  const ActiveFeature = FEATURE_COMPONENTS[activeTab];
+  const location = useLocation();
+  // Extract feature ID from path (e.g., "/crontab" -> "crontab")
+  const currentId = location.pathname.substring(1) || 'debezium';
+  const activeNavItem = NAV_ITEMS.find(i => i.id === currentId) || NAV_ITEMS[0];
 
   return (
     <div className="flex h-screen w-full bg-slate-950 text-slate-200 font-sans selection:bg-blue-500/30">
-      <Sidebar
-        navItems={NAV_ITEMS}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-      />
+      <Sidebar navItems={NAV_ITEMS} />
 
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         <Header title={activeNavItem?.label} />
 
-        <main className="flex-1 overflow-hidden p-4 md:p-6 relative">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 relative">
           <div className="h-full w-full max-w-6xl mx-auto">
-            {ActiveFeature && <ActiveFeature />}
+            <Routes>
+              <Route path="/" element={<Navigate to="/debezium" replace />} />
+
+              {NAV_ITEMS.map(item => {
+                const Component = FEATURE_COMPONENTS[item.id];
+                return (
+                  <Route
+                    key={item.id}
+                    path={`/${item.id}`}
+                    element={<Component />}
+                  />
+                );
+              })}
+
+              {/* Fallback for unknown routes */}
+              <Route path="*" element={<Navigate to="/debezium" replace />} />
+            </Routes>
           </div>
         </main>
       </div>

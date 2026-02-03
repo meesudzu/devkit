@@ -6,3 +6,4 @@ export { default as CharacterCount } from './CharacterCount';
 export { default as PasswordGenerator } from './PasswordGenerator';
 export { default as HashGenerator } from './HashGenerator';
 export { default as BasicAuthGenerator } from './BasicAuthGenerator';
+export { default as CrontabGenerator } from './CrontabGenerator';

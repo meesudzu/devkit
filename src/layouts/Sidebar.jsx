@@ -1,29 +1,28 @@
 import { Terminal } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 /**
  * Navigation item configuration
  */
-const NavItem = ({ item, isActive, onClick }) => (
-    <button
-        onClick={onClick}
-        className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${isActive
+const NavItem = ({ item }) => (
+    <NavLink
+        to={`/${item.id}`}
+        className={({ isActive }) => `w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${isActive
             ? 'bg-blue-600/10 text-blue-400 border border-blue-600/20'
             : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
             }`}
     >
         <item.icon size={18} />
         <span className="text-sm font-medium">{item.label}</span>
-    </button>
+    </NavLink>
 );
 
 /**
  * Sidebar navigation component
  * @param {Object} props
  * @param {Array} props.navItems - Navigation items array
- * @param {string} props.activeTab - Currently active tab ID
- * @param {Function} props.onTabChange - Tab change handler
  */
-const Sidebar = ({ navItems, activeTab, onTabChange }) => {
+const Sidebar = ({ navItems }) => {
     return (
         <div className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0">
             {/* Logo */}
@@ -40,8 +39,6 @@ const Sidebar = ({ navItems, activeTab, onTabChange }) => {
                     <NavItem
                         key={item.id}
                         item={item}
-                        isActive={activeTab === item.id}
-                        onClick={() => onTabChange(item.id)}
                     />
                 ))}
             </nav>
