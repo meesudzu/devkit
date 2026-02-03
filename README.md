@@ -1,0 +1,43 @@
+# DevKit
+
+A sleek collection of developer tools built with React + Vite. Runs entirely in-browser with no backend required.
+
+## Features
+
+| Tool | Description |
+|------|-------------|
+| **Debezium Diff** | Compare JSON before/after states with smart auto-extraction from Kafka/Debezium payloads |
+| **JWT Debugger** | Decode and inspect JWT tokens with expiration status |
+| **Epoch Converter** | Convert Unix timestamps with timezone support |
+| **Base64 / URL** | Encode/decode Base64 and URL strings |
+| **Word Counter** | Count characters, words, lines, and paragraphs |
+
+## Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Tech Stack
+
+- **React 18** - UI framework
+- **Vite** - Build tool
+- **TailwindCSS** - Styling
+- **Lucide React** - Icons
+
+## Deployment
+
+Deployed automatically to GitHub Pages via GitHub Actions on push to `main`.
+
+**Live:** https://meesudzu.github.io/
+
+## License
+
+MIT
