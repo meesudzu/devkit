@@ -9,7 +9,8 @@ import {
   Hash,
   Lock,
   CalendarClock,
-  Mail
+  Mail,
+  FileJson
 } from 'lucide-react';
 
 // Layout components
@@ -26,7 +27,8 @@ import {
   HashGenerator,
   BasicAuthGenerator,
   CrontabGenerator,
-  SmtpChecker
+  SmtpChecker,
+  JsonToEnv
 } from './features';
 
 /**
@@ -43,6 +45,7 @@ const NAV_ITEMS = [
   { id: 'basicauth', label: 'Basic Auth', icon: KeyRound },
   { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock },
   { id: 'smtp', label: 'SMTP Checker', icon: Mail },
+  { id: 'json2env', label: 'JSON to .env', icon: FileJson },
 ];
 
 /**
@@ -59,6 +62,7 @@ const FEATURE_COMPONENTS = {
   basicauth: BasicAuthGenerator,
   crontab: CrontabGenerator,
   smtp: SmtpChecker,
+  json2env: JsonToEnv,
 };
 
 /**
