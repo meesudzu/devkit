@@ -20,22 +20,24 @@ const JsonToEnv = () => {
 
         try {
             const parsed = JSON.parse(input);
-            
+
             // Check if it's an object
             if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
                 throw new Error('Input must be a JSON object');
             }
 
-            const envLines = Object.entries(parsed).map(([key, value]) => {
-                let formattedValue = value;
-                
-                // Handle objects/arrays by stringifying them
-                if (typeof value === 'object' && value !== null) {
-                    formattedValue = JSON.stringify(value);
-                }
-                
-                return `${key}=${formattedValue}`;
-            });
+            const envLines = Object.entries(parsed)
+                .filter(([key]) => key.trim() !== '')
+                .map(([key, value]) => {
+                    let formattedValue = value;
+
+                    // Handle objects/arrays by stringifying them
+                    if (typeof value === 'object' && value !== null) {
+                        formattedValue = JSON.stringify(value);
+                    }
+
+                    return `${key}=${formattedValue}`;
+                });
 
             setOutput(envLines.join('\n'));
             setError(null);
@@ -44,7 +46,7 @@ const JsonToEnv = () => {
             // Don't clear output strictly on error to allow user to see partial work if we were doing valid-as-you-type, 
             // but here we are parsing whole thing. Let's keep previous valid output or clear? 
             // Clearing acts as visual feedback that it's broken.
-            setOutput(''); 
+            setOutput('');
         }
     }, [input]);
 
@@ -81,7 +83,7 @@ const JsonToEnv = () => {
                     <label className="text-xs font-bold text-slate-500 uppercase flex justify-between items-center">
                         <span>Output (.env)</span>
                         {output && (
-                            <button 
+                            <button
                                 onClick={handleCopy}
                                 className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors"
                             >
