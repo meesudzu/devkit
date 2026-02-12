@@ -1,5 +1,6 @@
-import { Terminal } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Terminal, Search, ChevronDown, ChevronRight, X } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 /**
  * Navigation item configuration
@@ -20,9 +21,59 @@ const NavItem = ({ item }) => (
 /**
  * Sidebar navigation component
  * @param {Object} props
- * @param {Array} props.navItems - Navigation items array
+ * @param {Array} props.menuGroups - Grouped navigation items
  */
-const Sidebar = ({ navItems }) => {
+const Sidebar = ({ menuGroups }) => {
+    const location = useLocation();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [expandedGroups, setExpandedGroups] = useState({});
+
+    // Auto-expand group containing the active tool
+    useEffect(() => {
+        const currentId = location.pathname.substring(1);
+        if (!currentId) return;
+
+        const activeGroup = menuGroups.find(group =>
+            group.items.some(item => item.id === currentId)
+        );
+
+        if (activeGroup) {
+            setExpandedGroups(prev => ({
+                ...prev,
+                [activeGroup.label]: true
+            }));
+        }
+    }, [location.pathname, menuGroups]);
+
+    // Filter and group items based on search query
+    const filteredGroups = useMemo(() => {
+        if (!searchQuery.trim()) return menuGroups;
+
+        return menuGroups
+            .map(group => ({
+                ...group,
+                items: group.items.filter(item =>
+                    item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.id.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+            }))
+            .filter(group => group.items.length > 0);
+    }, [menuGroups, searchQuery]);
+
+    // Handle group toggle
+    const toggleGroup = (label) => {
+        setExpandedGroups(prev => ({
+            ...prev,
+            [label]: !prev[label]
+        }));
+    };
+
+    // Auto-expand groups when searching
+    const isExpanded = (label) => {
+        if (searchQuery.trim()) return true;
+        return !!expandedGroups[label];
+    };
+
     return (
         <div className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0">
             {/* Logo */}
@@ -33,14 +84,62 @@ const Sidebar = ({ navItems }) => {
                 </span>
             </div>
 
-            {/* Navigation */}
-            <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
-                {navItems.map((item) => (
-                    <NavItem
-                        key={item.id}
-                        item={item}
+            {/* Search Box */}
+            <div className="p-3">
+                <div className="relative group">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-500 transition-colors" size={16} />
+                    <input
+                        type="text"
+                        placeholder="Search tools..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-lg pl-9 pr-8 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 outline-none transition-all"
                     />
-                ))}
+                    {searchQuery && (
+                        <button
+                            onClick={() => setSearchQuery('')}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-slate-200 transition-colors"
+                        >
+                            <X size={14} />
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            {/* Navigation */}
+            <nav className="flex-1 p-2 space-y-2 overflow-y-auto custom-scrollbar">
+                {filteredGroups.length > 0 ? (
+                    filteredGroups.map((group) => {
+                        const expanded = isExpanded(group.label);
+                        return (
+                            <div key={group.label} className="space-y-1">
+                                <button
+                                    onClick={() => toggleGroup(group.label)}
+                                    className="w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest hover:text-slate-300 transition-colors group"
+                                >
+                                    <span>{group.label}</span>
+                                    {expanded ? (
+                                        <ChevronDown size={12} className="text-slate-600 group-hover:text-slate-400" />
+                                    ) : (
+                                        <ChevronRight size={12} className="text-slate-600 group-hover:text-slate-400" />
+                                    )}
+                                </button>
+                                {expanded && (
+                                    <div className="space-y-1 animate-in fade-in slide-in-from-top-1 duration-200">
+                                        {group.items.map((item) => (
+                                            <NavItem key={item.id} item={item} />
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })
+                ) : (
+                    <div className="flex flex-col items-center justify-center p-8 text-center">
+                        <Search size={32} className="text-slate-700 mb-2" />
+                        <p className="text-xs text-slate-500">No tools found for "{searchQuery}"</p>
+                    </div>
+                )}
             </nav>
 
             {/* Footer */}

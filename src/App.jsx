@@ -10,7 +10,9 @@ import {
   Lock,
   CalendarClock,
   Mail,
-  FileJson
+  FileJson,
+  Code,
+  Braces
 } from 'lucide-react';
 
 // Layout components
@@ -28,25 +30,54 @@ import {
   BasicAuthGenerator,
   CrontabGenerator,
   SmtpChecker,
-  JsonToEnv
+  JsonToEnv,
+  JsonBeautifier,
+  CodeTools
 } from './features';
 
 /**
  * Navigation configuration
  */
-const NAV_ITEMS = [
-  { id: 'debezium', label: 'Debezium Diff', icon: ArrowRightLeft },
-  { id: 'jwt', label: 'JWT Debugger', icon: ShieldCheck },
-  { id: 'epoch', label: 'Epoch Converter', icon: Clock },
-  { id: 'string', label: 'Base64 / URL', icon: Type },
-  { id: 'charcount', label: 'Word Counter', icon: AlignLeft },
-  { id: 'password', label: 'Password Gen', icon: Lock },
-  { id: 'hash', label: 'Hash Generator', icon: Hash },
-  { id: 'basicauth', label: 'Basic Auth', icon: KeyRound },
-  { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock },
-  { id: 'smtp', label: 'SMTP Checker', icon: Mail },
-  { id: 'json2env', label: 'JSON to .env', icon: FileJson },
+const MENU_GROUPS = [
+  {
+    label: 'Development',
+    items: [
+      { id: 'debezium', label: 'Debezium Diff', icon: ArrowRightLeft },
+      { id: 'json2env', label: 'JSON to .env', icon: FileJson },
+      { id: 'smtp', label: 'SMTP Checker', icon: Mail },
+    ]
+  },
+  {
+    label: 'Formatting',
+    items: [
+      { id: 'jsonbeautifier', label: 'JSON Beautifier', icon: Braces },
+      { id: 'codetools', label: 'Code Tools', icon: Code },
+    ]
+  },
+  {
+    label: 'Security',
+    items: [
+      { id: 'jwt', label: 'JWT Debugger', icon: ShieldCheck },
+      { id: 'password', label: 'Password Gen', icon: Lock },
+      { id: 'hash', label: 'Hash Generator', icon: Hash },
+      { id: 'basicauth', label: 'Basic Auth', icon: KeyRound },
+    ]
+  },
+  {
+    label: 'Utilities',
+    items: [
+      { id: 'epoch', label: 'Epoch Converter', icon: Clock },
+      { id: 'string', label: 'Base64 / URL', icon: Type },
+      { id: 'charcount', label: 'Word Counter', icon: AlignLeft },
+      { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock },
+    ]
+  }
 ];
+
+/**
+ * Flattened navigation items for routes
+ */
+const NAV_ITEMS = MENU_GROUPS.flatMap(group => group.items);
 
 /**
  * Feature component mapping
@@ -63,6 +94,8 @@ const FEATURE_COMPONENTS = {
   crontab: CrontabGenerator,
   smtp: SmtpChecker,
   json2env: JsonToEnv,
+  jsonbeautifier: JsonBeautifier,
+  codetools: CodeTools,
 };
 
 /**
@@ -76,7 +109,7 @@ const App = () => {
 
   return (
     <div className="flex h-screen w-full bg-slate-950 text-slate-200 font-sans selection:bg-blue-500/30">
-      <Sidebar navItems={NAV_ITEMS} />
+      <Sidebar menuGroups={MENU_GROUPS} />
 
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         <Header title={activeNavItem?.label} />
