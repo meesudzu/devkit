@@ -51,7 +51,10 @@ const MENU_GROUPS = [
     label: 'Formatting',
     items: [
       { id: 'jsonbeautifier', label: 'JSON Beautifier', icon: Braces },
-      { id: 'codetools', label: 'Code Tools', icon: Code },
+      { id: 'codetools-js', label: 'JS Beautifier/Minifier', icon: Code },
+      { id: 'codetools-css', label: 'CSS Beautifier/Minifier', icon: Code },
+      { id: 'codetools-html', label: 'HTML Beautifier/Minifier', icon: Code },
+      { id: 'codetools-yaml', label: 'YAML Beautifier/Minifier', icon: Code },
     ]
   },
   {
@@ -82,6 +85,13 @@ const NAV_ITEMS = MENU_GROUPS.flatMap(group => group.items);
 /**
  * Feature component mapping
  */
+const CODE_TOOL_ROUTES = {
+  javascript: '/codetools-js',
+  css: '/codetools-css',
+  html: '/codetools-html',
+  yaml: '/codetools-yaml',
+};
+
 const FEATURE_COMPONENTS = {
   debezium: DebeziumDiff,
   jwt: JwtDebugger,
@@ -95,7 +105,10 @@ const FEATURE_COMPONENTS = {
   smtp: SmtpChecker,
   json2env: JsonToEnv,
   jsonbeautifier: JsonBeautifier,
-  codetools: CodeTools,
+  'codetools-js': () => <CodeTools initialLanguage="javascript" languageRoutes={CODE_TOOL_ROUTES} />,
+  'codetools-css': () => <CodeTools initialLanguage="css" languageRoutes={CODE_TOOL_ROUTES} />,
+  'codetools-html': () => <CodeTools initialLanguage="html" languageRoutes={CODE_TOOL_ROUTES} />,
+  'codetools-yaml': () => <CodeTools initialLanguage="yaml" languageRoutes={CODE_TOOL_ROUTES} />,
 };
 
 /**

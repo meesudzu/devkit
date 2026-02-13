@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Copy, Check, Trash2, Wand2, Minimize2 } from 'lucide-react';
 import beautify from 'js-beautify';
 import yaml from 'js-yaml';
+import { useNavigate } from 'react-router-dom';
 
-const CodeTools = () => {
+const CodeTools = ({ initialLanguage = 'javascript', languageRoutes = null }) => {
+    const navigate = useNavigate();
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
-    const [language, setLanguage] = useState('javascript');
+    const [language, setLanguage] = useState(initialLanguage);
     const [mode, setMode] = useState('beautify'); // 'beautify' or 'minify'
     const [spaces, setSpaces] = useState(2);
     const [copied, setCopied] = useState(false);
@@ -18,6 +20,11 @@ const CodeTools = () => {
         { id: 'html', label: 'HTML' },
         { id: 'yaml', label: 'YAML' },
     ];
+
+    useEffect(() => {
+        setLanguage(initialLanguage);
+        setError(null);
+    }, [initialLanguage]);
 
     useEffect(() => {
         if (!input.trim()) {
@@ -107,6 +114,15 @@ const CodeTools = () => {
         setError(null);
     };
 
+    const handleLanguageChange = (nextLanguage) => {
+        if (languageRoutes?.[nextLanguage]) {
+            navigate(languageRoutes[nextLanguage]);
+            return;
+        }
+
+        setLanguage(nextLanguage);
+    };
+
     return (
         <div className="flex flex-col gap-4 h-full">
             <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900/50 p-4 rounded-xl border border-slate-800">
@@ -116,7 +132,7 @@ const CodeTools = () => {
                         <span className="text-sm font-medium text-slate-400">Language:</span>
                         <select
                             value={language}
-                            onChange={(e) => setLanguage(e.target.value)}
+                            onChange={(e) => handleLanguageChange(e.target.value)}
                             className="bg-slate-800 text-slate-200 text-sm font-bold rounded-lg px-3 py-1.5 border border-slate-700 focus:border-blue-500 outline-none cursor-pointer"
                         >
                             {LANGUAGES.map((l) => (
