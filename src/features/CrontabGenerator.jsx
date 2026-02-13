@@ -60,21 +60,34 @@ const CrontabGenerator = () => {
         }
     }, [expression]);
 
+    const sanitizeFieldValue = (value) => value.replace(/[^0-9*/,\-]/g, '');
+
     // Update expression when fields change
-    const handleFieldChange = (field, value) => {
-        const newFields = { ...fields, [field]: value || '*' };
+    const handleFieldChange = (field, value, allowEmpty = false) => {
+        const sanitizedValue = sanitizeFieldValue(value);
+        const fieldValue = allowEmpty ? sanitizedValue : (sanitizedValue || '*');
+        const newFields = { ...fields, [field]: fieldValue };
         setFields(newFields);
-        setExpression(`${newFields.minute} ${newFields.hour} ${newFields.day} ${newFields.month} ${newFields.weekday}`);
+
+        // Keep input empty while the user edits, and only rebuild expression when a concrete value exists.
+        if (allowEmpty && fieldValue === '') {
+            return;
+        }
+
+        setExpression(
+            `${newFields.minute || '*'} ${newFields.hour || '*'} ${newFields.day || '*'} ${newFields.month || '*'} ${newFields.weekday || '*'}`
+        );
     };
 
     const handleExpressionChange = (value) => {
-        setExpression(value.trim().replace(/\s+/g, ' '));
+        const sanitized = value.replace(/[A-Za-z]/g, '');
+        setExpression(sanitized);
     };
 
     // Auto-remove '*' when focusing
     const handleFocus = (field) => {
         if (fields[field] === '*') {
-            handleFieldChange(field, '');
+            setFields((prev) => ({ ...prev, [field]: '' }));
         }
     };
 
@@ -85,18 +98,16 @@ const CrontabGenerator = () => {
         }
     };
 
-    // Update fields when expression changes (simple split)
+    // Keep field editors in sync with the cron expression input.
     useEffect(() => {
-        const parts = expression.trim().split(/\s+/);
-        if (parts.length === 5) {
-            setFields({
-                minute: parts[0],
-                hour: parts[1],
-                day: parts[2],
-                month: parts[3],
-                weekday: parts[4]
-            });
-        }
+        const parts = expression.trim() ? expression.trim().split(/\s+/) : [];
+        setFields({
+            minute: parts[0] || '*',
+            hour: parts[1] || '*',
+            day: parts[2] || '*',
+            month: parts[3] || '*',
+            weekday: parts[4] || '*'
+        });
     }, [expression]);
 
     const copyToClipboard = async () => {
@@ -192,7 +203,7 @@ const CrontabGenerator = () => {
                                     value={fields[field.id]}
                                     onFocus={() => handleFocus(field.id)}
                                     onBlur={() => handleBlur(field.id)}
-                                    onChange={(e) => handleFieldChange(field.id, e.target.value)}
+                                    onChange={(e) => handleFieldChange(field.id, e.target.value, true)}
                                     className="bg-slate-900 border border-slate-700 rounded-lg px-2 py-3 text-center text-lg font-mono text-slate-200 focus:border-blue-500 outline-none focus:ring-1 focus:ring-blue-500/50 transition-all"
                                     placeholder="*"
                                 />
