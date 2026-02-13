@@ -67,6 +67,10 @@ const CrontabGenerator = () => {
         setExpression(`${newFields.minute} ${newFields.hour} ${newFields.day} ${newFields.month} ${newFields.weekday}`);
     };
 
+    const handleExpressionChange = (value) => {
+        setExpression(value.trim().replace(/\s+/g, ' '));
+    };
+
     // Auto-remove '*' when focusing
     const handleFocus = (field) => {
         if (fields[field] === '*') {
@@ -83,7 +87,7 @@ const CrontabGenerator = () => {
 
     // Update fields when expression changes (simple split)
     useEffect(() => {
-        const parts = expression.split(' ');
+        const parts = expression.trim().split(/\s+/);
         if (parts.length === 5) {
             setFields({
                 minute: parts[0],
@@ -157,6 +161,19 @@ const CrontabGenerator = () => {
                                 </span>
                             )}
                         </div>
+                    </div>
+
+                    {/* Direct Input */}
+                    <div className="flex flex-col gap-2">
+                        <label className="text-xs text-slate-400 font-medium uppercase tracking-wider">Cron Expression</label>
+                        <input
+                            type="text"
+                            value={expression}
+                            onChange={(e) => handleExpressionChange(e.target.value)}
+                            placeholder="0 5 * * *"
+                            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-base md:text-lg font-mono text-slate-200 focus:border-blue-500 outline-none focus:ring-1 focus:ring-blue-500/50 transition-all"
+                        />
+                        <span className="text-[11px] text-slate-500">Example: <code className="text-blue-400">0 5 * * *</code> (every day at 05:00)</span>
                     </div>
 
                     {/* Editor Fields */}
