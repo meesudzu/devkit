@@ -36,7 +36,10 @@ const JsonToEnv = () => {
                         formattedValue = JSON.stringify(value);
                     }
 
-                    return `${key}=${formattedValue}`;
+                    // Escape existing double quotes
+                    formattedValue = String(formattedValue).replace(/"/g, '\\"');
+
+                    return `${key}="${formattedValue}"`;
                 });
 
             setOutput(envLines.join('\n'));
