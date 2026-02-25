@@ -44,6 +44,7 @@ const MENU_GROUPS = [
     items: [
       { id: 'debezium', label: 'Debezium Diff', icon: ArrowRightLeft },
       { id: 'json2env', label: 'JSON to .env', icon: FileJson },
+      { id: 'env2json', label: '.env to JSON', icon: FileJson },
       { id: 'smtp', label: 'SMTP Checker', icon: Mail },
     ]
   },
@@ -103,7 +104,8 @@ const FEATURE_COMPONENTS = {
   basicauth: BasicAuthGenerator,
   crontab: CrontabGenerator,
   smtp: SmtpChecker,
-  json2env: JsonToEnv,
+  json2env: () => <JsonToEnv initialMode="json2env" />,
+  env2json: () => <JsonToEnv initialMode="env2json" />,
   jsonbeautifier: JsonBeautifier,
   'codetools-js': () => <CodeTools initialLanguage="javascript" languageRoutes={CODE_TOOL_ROUTES} />,
   'codetools-css': () => <CodeTools initialLanguage="css" languageRoutes={CODE_TOOL_ROUTES} />,
