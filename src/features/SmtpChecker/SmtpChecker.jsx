@@ -24,7 +24,7 @@ const SmtpChecker = () => {
                         <RefreshCw size={14} />
                     </button>
                     <a
-                        href="https://smtp-checker.runany.dev"
+                        href="https://smtp-checker-1092632052494.asia-southeast1.run.app"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-md transition-colors"
@@ -38,7 +38,7 @@ const SmtpChecker = () => {
             <div className="flex-1 w-full bg-white relative">
                 <iframe
                     key={key}
-                    src="https://smtp-checker.runany.dev"
+                    src="https://smtp-checker-1092632052494.asia-southeast1.run.app"
                     className="absolute inset-0 w-full h-full border-0"
                     title="SMTP Checker"
                     allow="clipboard-write"
