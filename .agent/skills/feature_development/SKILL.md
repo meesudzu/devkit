@@ -43,3 +43,4 @@ src/features/<FeatureName>/
 -   [ ] Add sub-components as needed.
 -   [ ] Register route.
 -   [ ] Verify responsiveness and styling (Tailwind CSS).
+-   [ ] Update `README.md` to include the new feature in the features list.

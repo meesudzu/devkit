@@ -26,7 +26,11 @@ This workflow guides the creation of a new feature, ensuring all necessary files
 4.  **Add Navigation (Optional)**
     -   If the feature should be accessible from the main menu, add a link to `src/layouts/Header.jsx` (or Sidebar).
 
-5.  **Verify**
+5.  **Update Documentation**
+    -   Open `README.md`.
+    -   Add the new feature to the "Features" table with a short description.
+
+6.  **Verify**
     -   Run the dev server.
     -   Navigate to the new route.
     -   Check for console errors.
