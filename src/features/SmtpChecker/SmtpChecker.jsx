@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ExternalLink, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
+import { RefreshCw } from 'lucide-react';
 
 const SmtpChecker = () => {
     const [key, setKey] = useState(0);
@@ -13,7 +13,6 @@ const SmtpChecker = () => {
             <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-slate-900/50">
                 <div className="flex items-center gap-2">
                     <h2 className="text-sm font-medium text-slate-200">SMTP Checker</h2>
-                    <span className="text-xs text-slate-500 font-mono hidden sm:inline-block">smtp-checker.runany.dev</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <button
@@ -23,15 +22,6 @@ const SmtpChecker = () => {
                     >
                         <RefreshCw size={14} />
                     </button>
-                    <a
-                        href="https://smtp-checker-1092632052494.asia-southeast1.run.app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-md transition-colors"
-                        title="Open in new tab"
-                    >
-                        <ExternalLink size={14} />
-                    </a>
                 </div>
             </div>
 
