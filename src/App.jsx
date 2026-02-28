@@ -24,7 +24,7 @@ import {
   JwtDebugger,
   EpochConverter,
   StringTools,
-  CharacterCount,
+  TextAnalyzer,
   PasswordGenerator,
   HashGenerator,
   BasicAuthGenerator,
@@ -72,7 +72,7 @@ const MENU_GROUPS = [
     items: [
       { id: 'epoch', label: 'Epoch Converter', icon: Clock },
       { id: 'string', label: 'Base64 / URL', icon: Type },
-      { id: 'charcount', label: 'Word Counter', icon: AlignLeft },
+      { id: 'textanalyzer', label: 'Text Analyzer', icon: AlignLeft },
       { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock },
     ]
   }
@@ -98,7 +98,7 @@ const FEATURE_COMPONENTS = {
   jwt: JwtDebugger,
   epoch: EpochConverter,
   string: StringTools,
-  charcount: CharacterCount,
+  textanalyzer: TextAnalyzer,
   password: PasswordGenerator,
   hash: HashGenerator,
   basicauth: BasicAuthGenerator,

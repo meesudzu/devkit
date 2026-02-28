@@ -10,7 +10,7 @@ A sleek collection of developer tools built with React + Vite. Runs entirely in-
 | **JWT Debugger** | Decode and inspect JWT tokens with expiration status |
 | **Epoch Converter** | Convert Unix timestamps with timezone support |
 | **Base64 / URL** | Encode/decode Base64 and URL strings |
-| **Word Counter** | Count characters, words, lines, and paragraphs |
+| **Text Analyzer** | Count characters, words, lines, paragraphs, and bytes |
 | **Password Gen** | Generate secure random passwords with configurable options |
 | **Hash Generator** | Generate MD5 and bcrypt hashes |
 | **Basic Auth** | Generate HTTP headers and Nginx/Apache htpasswd entries |

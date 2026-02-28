@@ -37,10 +37,22 @@ src/features/<FeatureName>/
     const NewFeature = lazy(() => import('./features/NewFeature'));
     ```
 
-## Implementation Checklist
+## Implementation Checklist (New Feature)
 -   [ ] Create feature directory.
 -   [ ] Implement main component.
 -   [ ] Add sub-components as needed.
--   [ ] Register route.
+-   [ ] Export from `src/features/index.js`.
+-   [ ] Register route and navigation in `src/App.jsx` (`MENU_GROUPS` + `FEATURE_COMPONENTS`).
 -   [ ] Verify responsiveness and styling (Tailwind CSS).
 -   [ ] Update `README.md` to include the new feature in the features list.
+
+## Update/Rename Checklist
+When updating or renaming an existing feature, ensure **all** of the following are updated:
+-   [ ] Rename/update the component file (`src/features/<FeatureName>.jsx` or `src/features/<FeatureName>/`).
+-   [ ] Update component name and `export default` inside the file.
+-   [ ] Update export in `src/features/index.js`.
+-   [ ] Update `src/App.jsx`:
+    -   [ ] Import statement.
+    -   [ ] `MENU_GROUPS` — update `id` (route) and `label` (display name).
+    -   [ ] `FEATURE_COMPONENTS` — update key and component reference.
+-   [ ] Update `README.md` — feature name and description in the features table.
