@@ -7,6 +7,7 @@ A sleek collection of developer tools built with React + Vite. Runs entirely in-
 | Tool | Description |
 |------|-------------|
 | **Debezium Diff** | Compare JSON before/after states with smart auto-extraction from Kafka/Debezium payloads |
+| **JSON Key Diff** | Compare keys between two JSON objects, supporting deep and flat comparisons |
 | **JWT Debugger** | Decode and inspect JWT tokens with expiration status |
 | **Epoch Converter** | Convert Unix timestamps with timezone support |
 | **Base64 / URL** | Encode/decode Base64 and URL strings |

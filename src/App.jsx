@@ -32,7 +32,8 @@ import {
   SmtpChecker,
   JsonToEnv,
   JsonBeautifier,
-  CodeTools
+  CodeTools,
+  JsonKeyDiff
 } from './features';
 
 /**
@@ -43,6 +44,7 @@ const MENU_GROUPS = [
     label: 'Development',
     items: [
       { id: 'debezium', label: 'Debezium Diff', icon: ArrowRightLeft },
+      { id: 'jsonkeydiff', label: 'JSON Key Diff', icon: FileJson },
       { id: 'json2env', label: 'JSON to .env', icon: FileJson },
       { id: 'env2json', label: '.env to JSON', icon: FileJson },
       { id: 'smtp', label: 'SMTP Checker', icon: Mail },
@@ -107,6 +109,7 @@ const FEATURE_COMPONENTS = {
   json2env: () => <JsonToEnv initialMode="json2env" />,
   env2json: () => <JsonToEnv initialMode="env2json" />,
   jsonbeautifier: JsonBeautifier,
+  jsonkeydiff: JsonKeyDiff,
   'codetools-js': () => <CodeTools initialLanguage="javascript" languageRoutes={CODE_TOOL_ROUTES} />,
   'codetools-css': () => <CodeTools initialLanguage="css" languageRoutes={CODE_TOOL_ROUTES} />,
   'codetools-html': () => <CodeTools initialLanguage="html" languageRoutes={CODE_TOOL_ROUTES} />,
