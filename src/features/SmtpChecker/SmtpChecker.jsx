@@ -28,7 +28,7 @@ const SmtpChecker = () => {
             <div className="flex-1 w-full bg-white relative">
                 <iframe
                     key={key}
-                    src="https://smtp-checker-1092632052494.asia-southeast1.run.app"
+                    src="https://smtp-checker.runany.dev"
                     className="absolute inset-0 w-full h-full border-0"
                     title="SMTP Checker"
                     allow="clipboard-write"
