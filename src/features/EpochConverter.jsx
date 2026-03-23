@@ -18,6 +18,21 @@ const TIMEZONES = [
 ];
 
 /**
+ * Parse timestamp of varying precision to Date object
+ */
+const parseTimestamp = (val) => {
+    if (!val) return new Date(NaN);
+    const valStr = val.toString().replace("-", "").trim();
+    if (!valStr) return new Date(NaN);
+    let ms = Number(val);
+    if (valStr.length <= 11) ms *= 1000; // seconds
+    else if (valStr.length <= 14) ms *= 1; // milliseconds
+    else if (valStr.length <= 17) ms = Math.floor(ms / 1000); // microseconds
+    else ms = Math.floor(ms / 1000000); // nanoseconds
+    return new Date(ms);
+};
+
+/**
  * Epoch/Unix Timestamp Converter
  * Convert between timestamps and human-readable dates
  */
@@ -38,8 +53,10 @@ const EpochConverter = () => {
     const handleTsChange = (val) => {
         setTs(val);
         try {
-            const multiplier = val.toString().length > 11 ? 1 : 1000;
-            setIso(new Date(val * multiplier).toISOString());
+            const date = parseTimestamp(val);
+            if (!isNaN(date.getTime())) {
+                setIso(date.toISOString());
+            }
         } catch {
             // Invalid date, ignore
         }
@@ -64,8 +81,8 @@ const EpochConverter = () => {
      */
     const getFormattedDate = (timestamp, tz) => {
         try {
-            const multiplier = timestamp.toString().length > 11 ? 1 : 1000;
-            const date = new Date(timestamp * multiplier);
+            const date = parseTimestamp(timestamp);
+            if (isNaN(date.getTime())) return "Invalid Date";
             return new Intl.DateTimeFormat('en-GB', {
                 dateStyle: 'full',
                 timeStyle: 'long',
@@ -92,7 +109,7 @@ const EpochConverter = () => {
                 <div className="flex flex-col gap-6">
                     {/* Timestamp Input */}
                     <div className="flex flex-col gap-2">
-                        <label className="text-sm text-slate-400">Timestamp (Seconds or Millis)</label>
+                        <label className="text-sm text-slate-400">Timestamp (Sec, Ms, Micros, Nanos)</label>
                         <div className="flex gap-2">
                             <input
                                 type="number"
@@ -143,7 +160,7 @@ const EpochConverter = () => {
                             <div className="flex justify-between">
                                 <span className="text-slate-500">UTC:</span>
                                 <span className="text-orange-300 text-right">
-                                    {new Date(ts * (ts.toString().length > 11 ? 1 : 1000)).toUTCString()}
+                                    {!isNaN(parseTimestamp(ts).getTime()) ? parseTimestamp(ts).toUTCString() : "Invalid Date"}
                                 </span>
                             </div>
                         </div>
