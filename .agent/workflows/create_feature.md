@@ -24,7 +24,7 @@ This workflow guides the creation of a new feature, ensuring all necessary files
 4.  **Register Route & Navigation**
     -   Open `src/App.jsx`.
     -   Import the new component from `./features`.
-    -   Add entry to `MENU_GROUPS` with `id` (route path), `label` (display name), and `icon`.
+    -   Add entry to `MENU_GROUPS` with `id` (route path), `label` (display name), `icon`, and `keywords` (an array of at least 5 synonymous keywords for search functionality).
     -   Add entry to `FEATURE_COMPONENTS` mapping the `id` to the component.
 
 5.  **Update Documentation**
@@ -54,7 +54,7 @@ When updating or renaming an existing feature, follow **all** steps below to avo
 
 3.  **Update App.jsx**
     -   Update the import statement.
-    -   Update `MENU_GROUPS`: change `id` (route) and `label` (display name).
+    -   Update `MENU_GROUPS`: change `id` (route), `label` (display name), and `keywords` if necessary.
     -   Update `FEATURE_COMPONENTS`: change key and component reference.
 
 4.  **Update Documentation**
