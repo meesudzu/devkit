@@ -10,7 +10,8 @@ const calculateStats = (text) => ({
     charsNoSpaces: text.replace(/\s/g, '').length,
     words: text.trim() === '' ? 0 : text.trim().split(/\s+/).length,
     lines: text === '' ? 0 : text.split(/\n/).length,
-    paragraphs: text === '' ? 0 : text.split(/\n\s*\n/).filter(p => p.trim() !== '').length
+    paragraphs: text === '' ? 0 : text.split(/\n\s*\n/).filter(p => p.trim() !== '').length,
+    bytes: new TextEncoder().encode(text).length
 });
 
 /**
@@ -24,21 +25,22 @@ const StatCard = ({ value, label, color }) => (
 );
 
 /**
- * Character/Word Counter Tool
+ * Text Analyzer Tool
  */
-const CharacterCount = () => {
+const TextAnalyzer = () => {
     const [text, setText] = useState('');
     const stats = calculateStats(text);
 
     return (
         <div className="flex flex-col gap-4 h-full">
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 shrink-0">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 shrink-0">
                 <StatCard value={stats.chars} label="Characters" color="text-blue-400" />
                 <StatCard value={stats.words} label="Words" color="text-green-400" />
                 <StatCard value={stats.lines} label="Lines" color="text-purple-400" />
                 <StatCard value={stats.charsNoSpaces} label="No Spaces" color="text-orange-400" />
                 <StatCard value={stats.paragraphs} label="Paragraphs" color="text-yellow-400" />
+                <StatCard value={stats.bytes} label="Bytes" color="text-cyan-400" />
             </div>
 
             {/* Input Area */}
@@ -65,4 +67,4 @@ const CharacterCount = () => {
     );
 };
 
-export default CharacterCount;
+export default TextAnalyzer;

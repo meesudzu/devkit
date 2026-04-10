@@ -2,7 +2,7 @@ export { default as DebeziumDiff } from './debezium-diff';
 export { default as JwtDebugger } from './JwtDebugger';
 export { default as EpochConverter } from './EpochConverter';
 export { default as StringTools } from './StringTools';
-export { default as CharacterCount } from './CharacterCount';
+export { default as TextAnalyzer } from './TextAnalyzer';
 export { default as PasswordGenerator } from './PasswordGenerator';
 export { default as HashGenerator } from './HashGenerator';
 export { default as BasicAuthGenerator } from './BasicAuthGenerator';
@@ -11,4 +11,5 @@ export { default as SmtpChecker } from './SmtpChecker/SmtpChecker';
 export { default as JsonToEnv } from './JsonToEnv/JsonToEnv';
 export { default as JsonBeautifier } from './JsonBeautifier';
 export { default as CodeTools } from './CodeTools';
+export { default as JsonKeyDiff } from './JsonKeyDiff';
 

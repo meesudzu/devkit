@@ -49,12 +49,14 @@ const Sidebar = ({ menuGroups }) => {
     const filteredGroups = useMemo(() => {
         if (!searchQuery.trim()) return menuGroups;
 
+        const query = searchQuery.toLowerCase();
         return menuGroups
             .map(group => ({
                 ...group,
                 items: group.items.filter(item =>
-                    item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.id.toLowerCase().includes(searchQuery.toLowerCase())
+                    item.label.toLowerCase().includes(query) ||
+                    item.id.toLowerCase().includes(query) ||
+                    (item.keywords && item.keywords.some(kw => kw.toLowerCase().includes(query)))
                 )
             }))
             .filter(group => group.items.length > 0);

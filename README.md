@@ -7,14 +7,20 @@ A sleek collection of developer tools built with React + Vite. Runs entirely in-
 | Tool | Description |
 |------|-------------|
 | **Debezium Diff** | Compare JSON before/after states with smart auto-extraction from Kafka/Debezium payloads |
+| **JSON Key Diff** | Compare keys between two JSON objects, supporting deep and flat comparisons |
 | **JWT Debugger** | Decode and inspect JWT tokens with expiration status |
 | **Epoch Converter** | Convert Unix timestamps with timezone support |
 | **Base64 / URL** | Encode/decode Base64 and URL strings |
-| **Word Counter** | Count characters, words, lines, and paragraphs |
+| **Text Analyzer** | Count characters, words, lines, paragraphs, and bytes |
 | **Password Gen** | Generate secure random passwords with configurable options |
 | **Hash Generator** | Generate MD5 and bcrypt hashes |
 | **Basic Auth** | Generate HTTP headers and Nginx/Apache htpasswd entries |
 | **Crontab Gen** | Generate, explain, and validate cron expressions with UTC time |
+| **JSON to .env** | Convert JSON configurations to .env format securely |
+| **.env to JSON** | Parse .env strings into JSON structures |
+| **SMTP Checker** | Verify SMTP server connectivity and credentials |
+| **JSON Beautifier** | Format and parse JSON payloads |
+| **Code Beautifier/Minifier** | Format and minify JS, CSS, HTML, and YAML code |
 
 ## Quick Start
 

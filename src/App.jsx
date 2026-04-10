@@ -24,7 +24,7 @@ import {
   JwtDebugger,
   EpochConverter,
   StringTools,
-  CharacterCount,
+  TextAnalyzer,
   PasswordGenerator,
   HashGenerator,
   BasicAuthGenerator,
@@ -32,7 +32,8 @@ import {
   SmtpChecker,
   JsonToEnv,
   JsonBeautifier,
-  CodeTools
+  CodeTools,
+  JsonKeyDiff
 } from './features';
 
 /**
@@ -42,37 +43,39 @@ const MENU_GROUPS = [
   {
     label: 'Development',
     items: [
-      { id: 'debezium', label: 'Debezium Diff', icon: ArrowRightLeft },
-      { id: 'json2env', label: 'JSON to .env', icon: FileJson },
-      { id: 'smtp', label: 'SMTP Checker', icon: Mail },
+      { id: 'debezium', label: 'Debezium Diff', icon: ArrowRightLeft, keywords: ['debezium', 'event', 'kafka', 'cdc', 'compare', 'database'] },
+      { id: 'jsonkeydiff', label: 'JSON Key Diff', icon: FileJson, keywords: ['json', 'key', 'diff', 'compare', 'object', 'keys'] },
+      { id: 'json2env', label: 'JSON to .env', icon: FileJson, keywords: ['json', 'env', 'convert', 'parse', 'environment', 'variable'] },
+      { id: 'env2json', label: '.env to JSON', icon: FileJson, keywords: ['env', 'json', 'convert', 'parse', 'environment', 'variable'] },
+      { id: 'smtp', label: 'SMTP Checker', icon: Mail, keywords: ['smtp', 'email', 'mail', 'check', 'test', 'connection'] },
     ]
   },
   {
     label: 'Formatting',
     items: [
-      { id: 'jsonbeautifier', label: 'JSON Beautifier', icon: Braces },
-      { id: 'codetools-js', label: 'JS Beautifier/Minifier', icon: Code },
-      { id: 'codetools-css', label: 'CSS Beautifier/Minifier', icon: Code },
-      { id: 'codetools-html', label: 'HTML Beautifier/Minifier', icon: Code },
-      { id: 'codetools-yaml', label: 'YAML Beautifier/Minifier', icon: Code },
+      { id: 'jsonbeautifier', label: 'JSON Beautifier', icon: Braces, keywords: ['json', 'format', 'pretty', 'beautify', 'indent', 'validate'] },
+      { id: 'codetools-js', label: 'JS Beautifier/Minifier', icon: Code, keywords: ['javascript', 'js', 'format', 'minify', 'beautify', 'compress'] },
+      { id: 'codetools-css', label: 'CSS Beautifier/Minifier', icon: Code, keywords: ['css', 'format', 'minify', 'beautify', 'compress', 'style'] },
+      { id: 'codetools-html', label: 'HTML Beautifier/Minifier', icon: Code, keywords: ['html', 'format', 'minify', 'beautify', 'compress', 'markup'] },
+      { id: 'codetools-yaml', label: 'YAML Beautifier/Minifier', icon: Code, keywords: ['yaml', 'yml', 'format', 'minify', 'beautify', 'compress'] },
     ]
   },
   {
     label: 'Security',
     items: [
-      { id: 'jwt', label: 'JWT Debugger', icon: ShieldCheck },
-      { id: 'password', label: 'Password Gen', icon: Lock },
-      { id: 'hash', label: 'Hash Generator', icon: Hash },
-      { id: 'basicauth', label: 'Basic Auth', icon: KeyRound },
+      { id: 'jwt', label: 'JWT Debugger', icon: ShieldCheck, keywords: ['jwt', 'token', 'decode', 'encode', 'debug', 'json web token'] },
+      { id: 'password', label: 'Password Gen', icon: Lock, keywords: ['password', 'generate', 'random', 'security', 'pass', 'strength'] },
+      { id: 'hash', label: 'Hash Generator', icon: Hash, keywords: ['hash', 'md5', 'sha1', 'sha256', 'sha512', 'encode', 'digest'] },
+      { id: 'basicauth', label: 'Basic Auth', icon: KeyRound, keywords: ['basic', 'auth', 'encode', 'decode', 'base64', 'header'] },
     ]
   },
   {
     label: 'Utilities',
     items: [
-      { id: 'epoch', label: 'Epoch Converter', icon: Clock },
-      { id: 'string', label: 'Base64 / URL', icon: Type },
-      { id: 'charcount', label: 'Word Counter', icon: AlignLeft },
-      { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock },
+      { id: 'epoch', label: 'Epoch Converter', icon: Clock, keywords: ['epoch', 'timestamp', 'date', 'datetime', 'time', 'unix', 'milliseconds'] },
+      { id: 'string', label: 'Base64 / URL', icon: Type, keywords: ['base64', 'url', 'encode', 'decode', 'string', 'text'] },
+      { id: 'textanalyzer', label: 'Text Analyzer', icon: AlignLeft, keywords: ['text', 'analyze', 'count', 'words', 'characters', 'lines', 'length'] },
+      { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock, keywords: ['cron', 'crontab', 'schedule', 'time', 'generator', 'timer'] },
     ]
   }
 ];
@@ -97,14 +100,16 @@ const FEATURE_COMPONENTS = {
   jwt: JwtDebugger,
   epoch: EpochConverter,
   string: StringTools,
-  charcount: CharacterCount,
+  textanalyzer: TextAnalyzer,
   password: PasswordGenerator,
   hash: HashGenerator,
   basicauth: BasicAuthGenerator,
   crontab: CrontabGenerator,
   smtp: SmtpChecker,
-  json2env: JsonToEnv,
+  json2env: () => <JsonToEnv initialMode="json2env" />,
+  env2json: () => <JsonToEnv initialMode="env2json" />,
   jsonbeautifier: JsonBeautifier,
+  jsonkeydiff: JsonKeyDiff,
   'codetools-js': () => <CodeTools initialLanguage="javascript" languageRoutes={CODE_TOOL_ROUTES} />,
   'codetools-css': () => <CodeTools initialLanguage="css" languageRoutes={CODE_TOOL_ROUTES} />,
   'codetools-html': () => <CodeTools initialLanguage="html" languageRoutes={CODE_TOOL_ROUTES} />,
