@@ -12,4 +12,5 @@ export { default as JsonToEnv } from './JsonToEnv/JsonToEnv';
 export { default as JsonBeautifier } from './JsonBeautifier';
 export { default as CodeTools } from './CodeTools';
 export { default as JsonKeyDiff } from './JsonKeyDiff';
+export { default as DataTablePreview } from './DataTablePreview';
 

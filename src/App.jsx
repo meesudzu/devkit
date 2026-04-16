@@ -12,7 +12,8 @@ import {
   Mail,
   FileJson,
   Code,
-  Braces
+  Braces,
+  Table
 } from 'lucide-react';
 
 // Layout components
@@ -33,7 +34,8 @@ import {
   JsonToEnv,
   JsonBeautifier,
   CodeTools,
-  JsonKeyDiff
+  JsonKeyDiff,
+  DataTablePreview
 } from './features';
 
 /**
@@ -76,6 +78,7 @@ const MENU_GROUPS = [
       { id: 'string', label: 'Base64 / URL', icon: Type, keywords: ['base64', 'url', 'encode', 'decode', 'string', 'text'] },
       { id: 'textanalyzer', label: 'Text Analyzer', icon: AlignLeft, keywords: ['text', 'analyze', 'count', 'words', 'characters', 'lines', 'length'] },
       { id: 'crontab', label: 'Crontab Gen', icon: CalendarClock, keywords: ['cron', 'crontab', 'schedule', 'time', 'generator', 'timer'] },
+      { id: 'datatable', label: 'Data Table View', icon: Table, keywords: ['csv', 'tsv', 'table', 'data', 'preview', 'excel', 'spreadsheet'] },
     ]
   }
 ];
@@ -110,6 +113,7 @@ const FEATURE_COMPONENTS = {
   env2json: () => <JsonToEnv initialMode="env2json" />,
   jsonbeautifier: JsonBeautifier,
   jsonkeydiff: JsonKeyDiff,
+  datatable: DataTablePreview,
   'codetools-js': () => <CodeTools initialLanguage="javascript" languageRoutes={CODE_TOOL_ROUTES} />,
   'codetools-css': () => <CodeTools initialLanguage="css" languageRoutes={CODE_TOOL_ROUTES} />,
   'codetools-html': () => <CodeTools initialLanguage="html" languageRoutes={CODE_TOOL_ROUTES} />,
